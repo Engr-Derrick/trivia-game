@@ -2,813 +2,131 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CheckCircle, XCircle, Flame, Volume2, VolumeX } from 'lucide-react';
 
 const TriviaGame = () => {
-  // All 100+ questions
   const allTriviaQuestions = [
-    // Easy questions (1-30)
-    {
-      id: 1,
-      question: "What is the capital of France?",
-      options: ["London", "Berlin", "Paris", "Madrid"],
-      correct: 2,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 2,
-      question: "Which planet is known as the Red Planet?",
-      options: ["Venus", "Mars", "Jupiter", "Saturn"],
-      correct: 1,
-      difficulty: 1,
-      category: "Science"
-    },
-    {
-      id: 3,
-      question: "What is the largest ocean on Earth?",
-      options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
-      correct: 3,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 4,
-      question: "Who wrote 'Romeo and Juliet'?",
-      options: ["Jane Austen", "William Shakespeare", "Charles Dickens", "Mark Twain"],
-      correct: 1,
-      difficulty: 1,
-      category: "Literature"
-    },
-    {
-      id: 5,
-      question: "What is the smallest country in the world?",
-      options: ["Monaco", "Liechtenstein", "Vatican City", "Malta"],
-      correct: 2,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 6,
-      question: "How many sides does a hexagon have?",
-      options: ["4", "5", "6", "8"],
-      correct: 2,
-      difficulty: 1,
-      category: "Math"
-    },
-    {
-      id: 7,
-      question: "What color is the sky on a clear day?",
-      options: ["Green", "Blue", "Yellow", "Red"],
-      correct: 1,
-      difficulty: 1,
-      category: "Nature"
-    },
-    {
-      id: 8,
-      question: "Which animal is known as the 'King of the Jungle'?",
-      options: ["Tiger", "Elephant", "Lion", "Bear"],
-      correct: 2,
-      difficulty: 1,
-      category: "Animals"
-    },
-    {
-      id: 9,
-      question: "What is the chemical symbol for Gold?",
-      options: ["Go", "Gd", "Au", "Ag"],
-      correct: 2,
-      difficulty: 1,
-      category: "Science"
-    },
-    {
-      id: 10,
-      question: "In what year did the Titanic sink?",
-      options: ["1905", "1912", "1920", "1898"],
-      correct: 1,
-      difficulty: 1,
-      category: "History"
-    },
-    {
-      id: 11,
-      question: "What is the largest mammal in the world?",
-      options: ["African Elephant", "Giraffe", "Blue Whale", "Hippopotamus"],
-      correct: 2,
-      difficulty: 1,
-      category: "Animals"
-    },
-    {
-      id: 12,
-      question: "How many continents are there?",
-      options: ["5", "6", "7", "8"],
-      correct: 2,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 13,
-      question: "What is the hardest natural substance on Earth?",
-      options: ["Gold", "Diamond", "Platinum", "Iron"],
-      correct: 1,
-      difficulty: 1,
-      category: "Science"
-    },
-    {
-      id: 14,
-      question: "Who was the first President of the United States?",
-      options: ["Thomas Jefferson", "George Washington", "John Adams", "James Madison"],
-      correct: 1,
-      difficulty: 1,
-      category: "History"
-    },
-    {
-      id: 15,
-      question: "What is the chemical symbol for Water?",
-      options: ["W", "H2O", "HO", "O2"],
-      correct: 1,
-      difficulty: 1,
-      category: "Chemistry"
-    },
-    {
-      id: 16,
-      question: "Which is the longest river in the world?",
-      options: ["Amazon", "Nile", "Yangtze", "Mississippi"],
-      correct: 1,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 17,
-      question: "How many bones does an adult human have?",
-      options: ["186", "206", "226", "246"],
-      correct: 1,
-      difficulty: 1,
-      category: "Biology"
-    },
-    {
-      id: 18,
-      question: "What is the smallest bone in the human body?",
-      options: ["Tibia", "Stapes", "Radius", "Fibula"],
-      correct: 1,
-      difficulty: 1,
-      category: "Biology"
-    },
-    {
-      id: 19,
-      question: "Which country has the most population?",
-      options: ["India", "United States", "Indonesia", "Brazil"],
-      correct: 0,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 20,
-      question: "What is the capital of Japan?",
-      options: ["Osaka", "Kyoto", "Tokyo", "Yokohama"],
-      correct: 2,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 21,
-      question: "Which fruit is known as the 'King of Fruits'?",
-      options: ["Mango", "Banana", "Apple", "Orange"],
-      correct: 0,
-      difficulty: 1,
-      category: "Nature"
-    },
-    {
-      id: 22,
-      question: "How many strings does a guitar typically have?",
-      options: ["4", "6", "8", "10"],
-      correct: 1,
-      difficulty: 1,
-      category: "Music"
-    },
-    {
-      id: 23,
-      question: "What is the capital of Australia?",
-      options: ["Sydney", "Melbourne", "Canberra", "Brisbane"],
-      correct: 2,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 24,
-      question: "Which ocean is the largest?",
-      options: ["Atlantic", "Indian", "Arctic", "Pacific"],
-      correct: 3,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 25,
-      question: "What is the only mammal that can't jump?",
-      options: ["Kangaroo", "Elephant", "Giraffe", "Hippopotamus"],
-      correct: 3,
-      difficulty: 1,
-      category: "Animals"
-    },
-    {
-      id: 26,
-      question: "How many days are in a leap year?",
-      options: ["364", "365", "366", "367"],
-      correct: 2,
-      difficulty: 1,
-      category: "Time"
-    },
-    {
-      id: 27,
-      question: "What is the smallest prime number?",
-      options: ["0", "1", "2", "3"],
-      correct: 2,
-      difficulty: 1,
-      category: "Math"
-    },
-    {
-      id: 28,
-      question: "Which country is home to the Statue of Liberty?",
-      options: ["France", "United States", "Italy", "Germany"],
-      correct: 1,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 29,
-      question: "What is the capital of Spain?",
-      options: ["Barcelona", "Madrid", "Valencia", "Seville"],
-      correct: 1,
-      difficulty: 1,
-      category: "Geography"
-    },
-    {
-      id: 30,
-      question: "How many sides does a triangle have?",
-      options: ["2", "3", "4", "5"],
-      correct: 1,
-      difficulty: 1,
-      category: "Math"
-    },
+    // EASY TRIVIA (1-25)
+    { id: 1, question: "What is the capital of France?", options: ["London", "Berlin", "Paris", "Madrid"], correct: 2, difficulty: 1, category: "Geography", type: "trivia" },
+    { id: 2, question: "Which planet is known as the Red Planet?", options: ["Venus", "Mars", "Jupiter", "Saturn"], correct: 1, difficulty: 1, category: "Science", type: "trivia" },
+    { id: 3, question: "What is the largest ocean on Earth?", options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"], correct: 3, difficulty: 1, category: "Geography", type: "trivia" },
+    { id: 4, question: "Who wrote 'Romeo and Juliet'?", options: ["Jane Austen", "William Shakespeare", "Charles Dickens", "Mark Twain"], correct: 1, difficulty: 1, category: "Literature", type: "trivia" },
+    { id: 5, question: "What is the smallest country in the world?", options: ["Monaco", "Liechtenstein", "Vatican City", "Malta"], correct: 2, difficulty: 1, category: "Geography", type: "trivia" },
+    { id: 6, question: "How many sides does a hexagon have?", options: ["4", "5", "6", "8"], correct: 2, difficulty: 1, category: "Math", type: "trivia" },
+    { id: 7, question: "What color is the sky on a clear day?", options: ["Green", "Blue", "Yellow", "Red"], correct: 1, difficulty: 1, category: "Nature", type: "trivia" },
+    { id: 8, question: "Which animal is known as the 'King of the Jungle'?", options: ["Tiger", "Elephant", "Lion", "Bear"], correct: 2, difficulty: 1, category: "Animals", type: "trivia" },
+    { id: 9, question: "What is the chemical symbol for Gold?", options: ["Go", "Gd", "Au", "Ag"], correct: 2, difficulty: 1, category: "Science", type: "trivia" },
+    { id: 10, question: "In what year did the Titanic sink?", options: ["1905", "1912", "1920", "1898"], correct: 1, difficulty: 1, category: "History", type: "trivia" },
+    { id: 11, question: "What is the largest mammal in the world?", options: ["African Elephant", "Giraffe", "Blue Whale", "Hippopotamus"], correct: 2, difficulty: 1, category: "Animals", type: "trivia" },
+    { id: 12, question: "How many continents are there?", options: ["5", "6", "7", "8"], correct: 2, difficulty: 1, category: "Geography", type: "trivia" },
+    { id: 13, question: "What is the hardest natural substance on Earth?", options: ["Gold", "Diamond", "Platinum", "Iron"], correct: 1, difficulty: 1, category: "Science", type: "trivia" },
+    { id: 14, question: "Who was the first President of the United States?", options: ["Thomas Jefferson", "George Washington", "John Adams", "James Madison"], correct: 1, difficulty: 1, category: "History", type: "trivia" },
+    { id: 15, question: "What is the chemical symbol for Water?", options: ["W", "H2O", "HO", "O2"], correct: 1, difficulty: 1, category: "Chemistry", type: "trivia" },
+    { id: 16, question: "Which is the longest river in the world?", options: ["Amazon", "Nile", "Yangtze", "Mississippi"], correct: 1, difficulty: 1, category: "Geography", type: "trivia" },
+    { id: 17, question: "How many bones does an adult human have?", options: ["186", "206", "226", "246"], correct: 1, difficulty: 1, category: "Biology", type: "trivia" },
+    { id: 18, question: "What is the capital of Japan?", options: ["Osaka", "Kyoto", "Tokyo", "Yokohama"], correct: 2, difficulty: 1, category: "Geography", type: "trivia" },
+    { id: 19, question: "Which fruit is known as the 'King of Fruits'?", options: ["Mango", "Banana", "Apple", "Orange"], correct: 0, difficulty: 1, category: "Nature", type: "trivia" },
+    { id: 20, question: "How many strings does a guitar typically have?", options: ["4", "6", "8", "10"], correct: 1, difficulty: 1, category: "Music", type: "trivia" },
+    { id: 21, question: "What is the capital of Australia?", options: ["Sydney", "Melbourne", "Canberra", "Brisbane"], correct: 2, difficulty: 1, category: "Geography", type: "trivia" },
+    { id: 22, question: "Which ocean is the largest?", options: ["Atlantic", "Indian", "Arctic", "Pacific"], correct: 3, difficulty: 1, category: "Geography", type: "trivia" },
+    { id: 23, question: "How many days are in a leap year?", options: ["364", "365", "366", "367"], correct: 2, difficulty: 1, category: "Time", type: "trivia" },
+    { id: 24, question: "What is the smallest prime number?", options: ["0", "1", "2", "3"], correct: 2, difficulty: 1, category: "Math", type: "trivia" },
+    { id: 25, question: "Which country is home to the Statue of Liberty?", options: ["France", "United States", "Italy", "Germany"], correct: 1, difficulty: 1, category: "Geography", type: "trivia" },
 
-    // Medium questions (31-65)
-    {
-      id: 31,
-      question: "Who painted the Mona Lisa?",
-      options: ["Michelangelo", "Leonardo da Vinci", "Raphael", "Donatello"],
-      correct: 1,
-      difficulty: 2,
-      category: "Art"
-    },
-    {
-      id: 32,
-      question: "What is the currency of Japan?",
-      options: ["Won", "Yuan", "Yen", "Ringgit"],
-      correct: 2,
-      difficulty: 2,
-      category: "Economics"
-    },
-    {
-      id: 33,
-      question: "Which country is home to the Great Wall?",
-      options: ["Japan", "China", "Korea", "Mongolia"],
-      correct: 1,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 34,
-      question: "What is the speed of light?",
-      options: ["300,000 km/s", "150,000 km/s", "600,000 km/s", "100,000 km/s"],
-      correct: 0,
-      difficulty: 2,
-      category: "Science"
-    },
-    {
-      id: 35,
-      question: "How many strings does a violin have?",
-      options: ["4", "5", "6", "8"],
-      correct: 0,
-      difficulty: 2,
-      category: "Music"
-    },
-    {
-      id: 36,
-      question: "What is the largest desert in the world?",
-      options: ["Sahara", "Kalahari", "Gobi", "Antarctica"],
-      correct: 3,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 37,
-      question: "What is the most spoken language in the world?",
-      options: ["Spanish", "English", "Mandarin Chinese", "Hindi"],
-      correct: 2,
-      difficulty: 2,
-      category: "Culture"
-    },
-    {
-      id: 38,
-      question: "Which Shakespeare play features the character Othello?",
-      options: ["Hamlet", "Othello", "Macbeth", "Romeo and Juliet"],
-      correct: 1,
-      difficulty: 2,
-      category: "Literature"
-    },
-    {
-      id: 39,
-      question: "What is the atomic number of Carbon?",
-      options: ["4", "6", "8", "12"],
-      correct: 1,
-      difficulty: 2,
-      category: "Chemistry"
-    },
-    {
-      id: 40,
-      question: "Which planet has the most moons?",
-      options: ["Saturn", "Jupiter", "Uranus", "Neptune"],
-      correct: 1,
-      difficulty: 2,
-      category: "Science"
-    },
-    {
-      id: 41,
-      question: "What is the capital of Brazil?",
-      options: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"],
-      correct: 2,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 42,
-      question: "Who invented the telephone?",
-      options: ["Thomas Edison", "Alexander Graham Bell", "Nikola Tesla", "George Westinghouse"],
-      correct: 1,
-      difficulty: 2,
-      category: "History"
-    },
-    {
-      id: 43,
-      question: "What is the main ingredient in guacamole?",
-      options: ["Tomato", "Avocado", "Lime", "Onion"],
-      correct: 1,
-      difficulty: 2,
-      category: "Food"
-    },
-    {
-      id: 44,
-      question: "Which country is not part of the United Kingdom?",
-      options: ["Scotland", "Wales", "Ireland", "England"],
-      correct: 2,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 45,
-      question: "What is the freezing point of water in Celsius?",
-      options: ["-10°C", "0°C", "10°C", "32°C"],
-      correct: 1,
-      difficulty: 2,
-      category: "Science"
-    },
-    {
-      id: 46,
-      question: "Which element has the atomic symbol 'Fe'?",
-      options: ["Fluorine", "Iron", "Fermium", "Francium"],
-      correct: 1,
-      difficulty: 2,
-      category: "Chemistry"
-    },
-    {
-      id: 47,
-      question: "What year did the Berlin Wall fall?",
-      options: ["1987", "1988", "1989", "1991"],
-      correct: 2,
-      difficulty: 2,
-      category: "History"
-    },
-    {
-      id: 48,
-      question: "Which Norse god is associated with thunder?",
-      options: ["Odin", "Loki", "Thor", "Freya"],
-      correct: 2,
-      difficulty: 2,
-      category: "Mythology"
-    },
-    {
-      id: 49,
-      question: "What is the smallest US state by area?",
-      options: ["Vermont", "Delaware", "Rhode Island", "Wyoming"],
-      correct: 2,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 50,
-      question: "How many sides does a dodecagon have?",
-      options: ["8", "10", "12", "15"],
-      correct: 2,
-      difficulty: 2,
-      category: "Math"
-    },
-    {
-      id: 51,
-      question: "What is the capital of Greece?",
-      options: ["Sparta", "Athens", "Corinth", "Delphi"],
-      correct: 1,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 52,
-      question: "Which planet is closest to the Sun?",
-      options: ["Venus", "Mercury", "Earth", "Mars"],
-      correct: 1,
-      difficulty: 2,
-      category: "Science"
-    },
-    {
-      id: 53,
-      question: "What does HTTP stand for?",
-      options: ["HyperText Transfer Protocol", "High Transfer Tech Protocol", "Home Tool Transfer Process", "Hyper Tool Text Process"],
-      correct: 0,
-      difficulty: 2,
-      category: "Technology"
-    },
-    {
-      id: 54,
-      question: "Which metal is liquid at room temperature?",
-      options: ["Gold", "Silver", "Mercury", "Copper"],
-      correct: 2,
-      difficulty: 2,
-      category: "Chemistry"
-    },
-    {
-      id: 55,
-      question: "What is the capital of Canada?",
-      options: ["Toronto", "Vancouver", "Ottawa", "Montreal"],
-      correct: 2,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 56,
-      question: "Who wrote '1984'?",
-      options: ["George Orwell", "Aldous Huxley", "Ray Bradbury", "Philip K. Dick"],
-      correct: 0,
-      difficulty: 2,
-      category: "Literature"
-    },
-    {
-      id: 57,
-      question: "What is the largest internal organ in the human body?",
-      options: ["Heart", "Liver", "Kidney", "Lung"],
-      correct: 1,
-      difficulty: 2,
-      category: "Biology"
-    },
-    {
-      id: 58,
-      question: "Which country has the most islands?",
-      options: ["Indonesia", "Philippines", "Sweden", "Finland"],
-      correct: 2,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 59,
-      question: "What is the capital of Egypt?",
-      options: ["Alexandria", "Cairo", "Giza", "Luxor"],
-      correct: 1,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 60,
-      question: "How many strings does a cello have?",
-      options: ["4", "6", "8", "10"],
-      correct: 0,
-      difficulty: 2,
-      category: "Music"
-    },
-    {
-      id: 61,
-      question: "What is the capital of Italy?",
-      options: ["Venice", "Milan", "Rome", "Naples"],
-      correct: 2,
-      difficulty: 2,
-      category: "Geography"
-    },
-    {
-      id: 62,
-      question: "Which animal is the fastest land animal?",
-      options: ["Lion", "Gazelle", "Cheetah", "Greyhound"],
-      correct: 2,
-      difficulty: 2,
-      category: "Animals"
-    },
-    {
-      id: 63,
-      question: "What is the main gas in the Earth's atmosphere?",
-      options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"],
-      correct: 2,
-      difficulty: 2,
-      category: "Science"
-    },
-    {
-      id: 64,
-      question: "Who invented the light bulb?",
-      options: ["Benjamin Franklin", "Nikola Tesla", "Thomas Edison", "George Westinghouse"],
-      correct: 2,
-      difficulty: 2,
-      category: "History"
-    },
-    {
-      id: 65,
-      question: "What is the capital of Mexico?",
-      options: ["Cancun", "Mexico City", "Monterrey", "Guadalajara"],
-      correct: 1,
-      difficulty: 2,
-      category: "Geography"
-    },
+    // SPELLING QUESTIONS (26-40)
+    { id: 26, question: "Which spelling is CORRECT?", options: ["Separate", "Seperate", "Seperete", "Seperete"], correct: 0, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 27, question: "Which spelling is CORRECT?", options: ["Neccessary", "Necessary", "Neccessery", "Necesary"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 28, question: "Which spelling is CORRECT?", options: ["Ocassion", "Ocasion", "Occasion", "Occassion"], correct: 2, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 29, question: "Which spelling is CORRECT?", options: ["Acommodate", "Accommodate", "Accomodate", "Acommodate"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 30, question: "Which spelling is CORRECT?", options: ["Definately", "Defintely", "Definitely", "Definately"], correct: 2, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 31, question: "Which spelling is CORRECT?", options: ["Recieve", "Receive", "Recieve", "Receve"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 32, question: "Which spelling is CORRECT?", options: ["Begining", "Beginning", "Begining", "Beging"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 33, question: "Which spelling is CORRECT?", options: ["Occured", "Occurred", "Ocurred", "Occured"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 34, question: "Which spelling is CORRECT?", options: ["Sincere", "Sinceer", "Sincear", "Sincer"], correct: 0, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 35, question: "Which spelling is CORRECT?", options: ["Diferent", "Different", "Diffrent", "Diferent"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 36, question: "Which spelling is CORRECT?", options: ["Realy", "Really", "Realy", "Realy"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 37, question: "Which spelling is CORRECT?", options: ["Suprize", "Surprise", "Suprise", "Surpise"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 38, question: "Which spelling is CORRECT?", options: ["Descibe", "Describe", "Discribe", "Describve"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 39, question: "Which spelling is CORRECT?", options: ["Practise", "Practice", "Practise", "Practce"], correct: 1, difficulty: 1, category: "Spelling", type: "spelling" },
+    { id: 40, question: "Which spelling is CORRECT?", options: ["Advise", "Advice", "Advise", "Advce"], correct: 0, difficulty: 1, category: "Spelling", type: "spelling" },
 
-    // Hard questions (66-100)
-    {
-      id: 66,
-      question: "What is the second most abundant element in Earth's crust?",
-      options: ["Oxygen", "Silicon", "Aluminum", "Iron"],
-      correct: 1,
-      difficulty: 3,
-      category: "Chemistry"
-    },
-    {
-      id: 67,
-      question: "Which physicist won the Nobel Prize twice?",
-      options: ["Albert Einstein", "Marie Curie", "Niels Bohr", "Max Planck"],
-      correct: 1,
-      difficulty: 3,
-      category: "Science"
-    },
-    {
-      id: 68,
-      question: "What is the capital of Kyrgyzstan?",
-      options: ["Astana", "Bishkek", "Ashgabat", "Dushanbe"],
-      correct: 1,
-      difficulty: 3,
-      category: "Geography"
-    },
-    {
-      id: 69,
-      question: "Who composed 'The Four Seasons'?",
-      options: ["Wolfgang Mozart", "Antonio Vivaldi", "Johann Sebastian Bach", "George Frideric Handel"],
-      correct: 1,
-      difficulty: 3,
-      category: "Music"
-    },
-    {
-      id: 70,
-      question: "Which continent is entirely within the Southern Hemisphere?",
-      options: ["South America", "Africa", "Australia", "Antarctica"],
-      correct: 3,
-      difficulty: 3,
-      category: "Geography"
-    },
-    {
-      id: 71,
-      question: "What is the deepest part of the ocean?",
-      options: ["Mariana Trench", "Tonga Trench", "Kuril Trench", "Philippine Trench"],
-      correct: 0,
-      difficulty: 3,
-      category: "Geography"
-    },
-    {
-      id: 72,
-      question: "Who wrote 'One Hundred Years of Solitude'?",
-      options: ["Jorge Luis Borges", "Gabriel García Márquez", "Pablo Neruda", "Octavio Paz"],
-      correct: 1,
-      difficulty: 3,
-      category: "Literature"
-    },
-    {
-      id: 73,
-      question: "What is the chemical formula for sulfuric acid?",
-      options: ["H2SO3", "H2SO4", "HSO4", "H3SO4"],
-      correct: 1,
-      difficulty: 3,
-      category: "Chemistry"
-    },
-    {
-      id: 74,
-      question: "Which country hosted the 1996 Summer Olympics?",
-      options: ["Barcelona", "Atlanta", "Sydney", "Athens"],
-      correct: 1,
-      difficulty: 3,
-      category: "Sports"
-    },
-    {
-      id: 75,
-      question: "What is the name of the largest blood vessel in the body?",
-      options: ["Carotid Artery", "Aorta", "Vena Cava", "Pulmonary Vein"],
-      correct: 1,
-      difficulty: 3,
-      category: "Biology"
-    },
-    {
-      id: 76,
-      question: "Who was the first woman to win a Nobel Prize?",
-      options: ["Lise Meitner", "Marie Curie", "Dorothy Hodgkin", "Irène Joliot-Curie"],
-      correct: 1,
-      difficulty: 3,
-      category: "History"
-    },
-    {
-      id: 77,
-      question: "What is Planck's constant approximately equal to?",
-      options: ["6.63 × 10^-34 J·s", "3.14 × 10^-34 J·s", "9.81 × 10^-34 J·s", "1.38 × 10^-23 J·s"],
-      correct: 0,
-      difficulty: 3,
-      category: "Physics"
-    },
-    {
-      id: 78,
-      question: "Which ancient wonder is still standing?",
-      options: ["Hanging Gardens of Babylon", "Great Pyramid of Giza", "Colossus of Rhodes", "Pharos of Alexandria"],
-      correct: 1,
-      difficulty: 3,
-      category: "History"
-    },
-    {
-      id: 79,
-      question: "What is the only letter that appears twice on the phone dial?",
-      options: ["S", "M", "O", "N"],
-      correct: 3,
-      difficulty: 3,
-      category: "Trivia"
-    },
-    {
-      id: 80,
-      question: "Who wrote 'Pride and Prejudice'?",
-      options: ["Charlotte Brontë", "Emily Brontë", "Jane Austen", "George Eliot"],
-      correct: 2,
-      difficulty: 3,
-      category: "Literature"
-    },
-    {
-      id: 81,
-      question: "What is the Heisenberg Uncertainty Principle about?",
-      options: ["Energy conservation", "Quantum mechanics limitations", "Relativity", "Thermodynamics"],
-      correct: 1,
-      difficulty: 3,
-      category: "Physics"
-    },
-    {
-      id: 82,
-      question: "Which river flows through Cairo?",
-      options: ["Tigris", "Euphrates", "Nile", "Jordan"],
-      correct: 2,
-      difficulty: 3,
-      category: "Geography"
-    },
-    {
-      id: 83,
-      question: "Who painted 'The Persistence of Memory'?",
-      options: ["Pablo Picasso", "Salvador Dalí", "Joan Miró", "Marc Chagall"],
-      correct: 1,
-      difficulty: 3,
-      category: "Art"
-    },
-    {
-      id: 84,
-      question: "What is the largest moon of Jupiter?",
-      options: ["Europa", "Io", "Ganymede", "Callisto"],
-      correct: 2,
-      difficulty: 3,
-      category: "Science"
-    },
-    {
-      id: 85,
-      question: "Who wrote 'The Brothers Karamazov'?",
-      options: ["Leo Tolstoy", "Fyodor Dostoevsky", "Ivan Turgenev", "Nikolai Gogol"],
-      correct: 1,
-      difficulty: 3,
-      category: "Literature"
-    },
-    {
-      id: 86,
-      question: "What is the capital of Zimbabwe?",
-      options: ["Harare", "Bulawayo", "Gweru", "Mutare"],
-      correct: 0,
-      difficulty: 3,
-      category: "Geography"
-    },
-    {
-      id: 87,
-      question: "Which element is the most electronegative?",
-      options: ["Oxygen", "Chlorine", "Fluorine", "Nitrogen"],
-      correct: 2,
-      difficulty: 3,
-      category: "Chemistry"
-    },
-    {
-      id: 88,
-      question: "What year did the Challenger space shuttle disaster occur?",
-      options: ["1984", "1985", "1986", "1987"],
-      correct: 2,
-      difficulty: 3,
-      category: "History"
-    },
-    {
-      id: 89,
-      question: "Who was the first African American president of the United States?",
-      options: ["Bill Clinton", "George W. Bush", "Barack Obama", "Donald Trump"],
-      correct: 2,
-      difficulty: 3,
-      category: "History"
-    },
-    {
-      id: 90,
-      question: "What is the capital of Peru?",
-      options: ["Cusco", "Lima", "Arequipa", "Trujillo"],
-      correct: 1,
-      difficulty: 3,
-      category: "Geography"
-    },
-    {
-      id: 91,
-      question: "Who composed 'Moonlight Sonata'?",
-      options: ["Wolfgang Mozart", "Ludwig van Beethoven", "Johann Sebastian Bach", "Franz Schubert"],
-      correct: 1,
-      difficulty: 3,
-      category: "Music"
-    },
-    {
-      id: 92,
-      question: "What is the smallest continent by area?",
-      options: ["Europe", "South America", "Australia", "Antarctica"],
-      correct: 2,
-      difficulty: 3,
-      category: "Geography"
-    },
-    {
-      id: 93,
-      question: "Who discovered penicillin?",
-      options: ["Louis Pasteur", "Alexander Fleming", "Joseph Lister", "Ignaz Semmelweis"],
-      correct: 1,
-      difficulty: 3,
-      category: "Science"
-    },
-    {
-      id: 94,
-      question: "What is the capital of Iceland?",
-      options: ["Akureyri", "Reykjavik", "Hafnarfjörður", "Kópavogur"],
-      correct: 1,
-      difficulty: 3,
-      category: "Geography"
-    },
-    {
-      id: 95,
-      question: "Who sculpted 'David'?",
-      options: ["Donatello", "Michelangelo", "Leonardo da Vinci", "Raphael"],
-      correct: 1,
-      difficulty: 3,
-      category: "Art"
-    },
-    {
-      id: 96,
-      question: "What is the Rosetta Stone made of?",
-      options: ["Granite", "Limestone", "Sandstone", "Basalt"],
-      correct: 3,
-      difficulty: 3,
-      category: "History"
-    },
-    {
-      id: 97,
-      question: "Who wrote 'Hamlet'?",
-      options: ["Christopher Marlowe", "William Shakespeare", "Ben Jonson", "Thomas Kyd"],
-      correct: 1,
-      difficulty: 3,
-      category: "Literature"
-    },
-    {
-      id: 98,
-      question: "What is the name of the phenomenon where objects move in space-time?",
-      options: ["Relativity", "Gravity", "Inertia", "Momentum"],
-      correct: 0,
-      difficulty: 3,
-      category: "Physics"
-    },
-    {
-      id: 99,
-      question: "Who was the first European to reach China?",
-      options: ["Christopher Columbus", "Vasco da Gama", "Marco Polo", "Ferdinand Magellan"],
-      correct: 2,
-      difficulty: 3,
-      category: "History"
-    },
-    {
-      id: 100,
-      question: "What is the capital of Thailand?",
-      options: ["Chiang Mai", "Phuket", "Bangkok", "Pattaya"],
-      correct: 2,
-      difficulty: 3,
-      category: "Geography"
-    }
+    // MEDIUM TRIVIA (41-75)
+    { id: 41, question: "Who painted the Mona Lisa?", options: ["Michelangelo", "Leonardo da Vinci", "Raphael", "Donatello"], correct: 1, difficulty: 2, category: "Art", type: "trivia" },
+    { id: 42, question: "What is the currency of Japan?", options: ["Won", "Yuan", "Yen", "Ringgit"], correct: 2, difficulty: 2, category: "Economics", type: "trivia" },
+    { id: 43, question: "Which country is home to the Great Wall?", options: ["Japan", "China", "Korea", "Mongolia"], correct: 1, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 44, question: "What is the speed of light?", options: ["300,000 km/s", "150,000 km/s", "600,000 km/s", "100,000 km/s"], correct: 0, difficulty: 2, category: "Science", type: "trivia" },
+    { id: 45, question: "How many strings does a violin have?", options: ["4", "5", "6", "8"], correct: 0, difficulty: 2, category: "Music", type: "trivia" },
+    { id: 46, question: "What is the LARGEST DESERT in the world?", options: ["Sahara Desert", "Kalahari Desert", "Gobi Desert", "Antarctica"], correct: 0, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 47, question: "What is the most spoken language in the world?", options: ["Spanish", "English", "Mandarin Chinese", "Hindi"], correct: 2, difficulty: 2, category: "Culture", type: "trivia" },
+    { id: 48, question: "Which Shakespeare play features the character Othello?", options: ["Hamlet", "Othello", "Macbeth", "Romeo and Juliet"], correct: 1, difficulty: 2, category: "Literature", type: "trivia" },
+    { id: 49, question: "What is the atomic number of Carbon?", options: ["4", "6", "8", "12"], correct: 1, difficulty: 2, category: "Chemistry", type: "trivia" },
+    { id: 50, question: "Which planet has the most moons?", options: ["Saturn", "Jupiter", "Uranus", "Neptune"], correct: 1, difficulty: 2, category: "Science", type: "trivia" },
+    { id: 51, question: "What is the capital of Brazil?", options: ["Rio de Janeiro", "São Paulo", "Brasília", "Salvador"], correct: 2, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 52, question: "Who invented the telephone?", options: ["Thomas Edison", "Alexander Graham Bell", "Nikola Tesla", "George Westinghouse"], correct: 1, difficulty: 2, category: "History", type: "trivia" },
+    { id: 53, question: "What is the main ingredient in guacamole?", options: ["Tomato", "Avocado", "Lime", "Onion"], correct: 1, difficulty: 2, category: "Food", type: "trivia" },
+    { id: 54, question: "Which country is not part of the United Kingdom?", options: ["Scotland", "Wales", "Ireland", "England"], correct: 2, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 55, question: "What is the freezing point of water in Celsius?", options: ["-10°C", "0°C", "10°C", "32°C"], correct: 1, difficulty: 2, category: "Science", type: "trivia" },
+    { id: 56, question: "Which element has the atomic symbol 'Fe'?", options: ["Fluorine", "Iron", "Fermium", "Francium"], correct: 1, difficulty: 2, category: "Chemistry", type: "trivia" },
+    { id: 57, question: "What year did the Berlin Wall fall?", options: ["1987", "1988", "1989", "1991"], correct: 2, difficulty: 2, category: "History", type: "trivia" },
+    { id: 58, question: "Which Norse god is associated with thunder?", options: ["Odin", "Loki", "Thor", "Freya"], correct: 2, difficulty: 2, category: "Mythology", type: "trivia" },
+    { id: 59, question: "What is the capital of Greece?", options: ["Sparta", "Athens", "Corinth", "Delphi"], correct: 1, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 60, question: "Which planet is closest to the Sun?", options: ["Venus", "Mercury", "Earth", "Mars"], correct: 1, difficulty: 2, category: "Science", type: "trivia" },
+    { id: 61, question: "What does HTTP stand for?", options: ["HyperText Transfer Protocol", "High Transfer Tech Protocol", "Home Tool Transfer Process", "Hyper Tool Text Process"], correct: 0, difficulty: 2, category: "Technology", type: "trivia" },
+    { id: 62, question: "Which metal is liquid at room temperature?", options: ["Gold", "Silver", "Mercury", "Copper"], correct: 2, difficulty: 2, category: "Chemistry", type: "trivia" },
+    { id: 63, question: "What is the capital of Canada?", options: ["Toronto", "Vancouver", "Ottawa", "Montreal"], correct: 2, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 64, question: "Who wrote '1984'?", options: ["George Orwell", "Aldous Huxley", "Ray Bradbury", "Philip K. Dick"], correct: 0, difficulty: 2, category: "Literature", type: "trivia" },
+    { id: 65, question: "What is the largest internal organ in the human body?", options: ["Heart", "Liver", "Kidney", "Lung"], correct: 1, difficulty: 2, category: "Biology", type: "trivia" },
+    { id: 66, question: "Which country has the most islands?", options: ["Indonesia", "Philippines", "Sweden", "Finland"], correct: 2, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 67, question: "What is the capital of Egypt?", options: ["Alexandria", "Cairo", "Giza", "Luxor"], correct: 1, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 68, question: "How many strings does a cello have?", options: ["4", "6", "8", "10"], correct: 0, difficulty: 2, category: "Music", type: "trivia" },
+    { id: 69, question: "What is the capital of Italy?", options: ["Venice", "Milan", "Rome", "Naples"], correct: 2, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 70, question: "Which animal is the fastest land animal?", options: ["Lion", "Gazelle", "Cheetah", "Greyhound"], correct: 2, difficulty: 2, category: "Animals", type: "trivia" },
+    { id: 71, question: "What is the main gas in the Earth's atmosphere?", options: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], correct: 2, difficulty: 2, category: "Science", type: "trivia" },
+    { id: 72, question: "Who invented the light bulb?", options: ["Benjamin Franklin", "Nikola Tesla", "Thomas Edison", "George Westinghouse"], correct: 2, difficulty: 2, category: "History", type: "trivia" },
+    { id: 73, question: "What is the capital of Mexico?", options: ["Cancun", "Mexico City", "Monterrey", "Guadalajara"], correct: 1, difficulty: 2, category: "Geography", type: "trivia" },
+    { id: 74, question: "How many chambers does a heart have?", options: ["2", "3", "4", "6"], correct: 2, difficulty: 2, category: "Biology", type: "trivia" },
+    { id: 75, question: "What is the deepest part of the ocean?", options: ["Mariana Trench", "Tonga Trench", "Kuril Trench", "Philippine Trench"], correct: 0, difficulty: 2, category: "Geography", type: "trivia" },
+
+    // HARD TRIVIA (76-100)
+    { id: 76, question: "What is the second most abundant element in Earth's crust?", options: ["Oxygen", "Silicon", "Aluminum", "Iron"], correct: 1, difficulty: 3, category: "Chemistry", type: "trivia" },
+    { id: 77, question: "Which physicist won the Nobel Prize twice?", options: ["Albert Einstein", "Marie Curie", "Niels Bohr", "Max Planck"], correct: 1, difficulty: 3, category: "Science", type: "trivia" },
+    { id: 78, question: "What is the capital of Kyrgyzstan?", options: ["Astana", "Bishkek", "Ashgabat", "Dushanbe"], correct: 1, difficulty: 3, category: "Geography", type: "trivia" },
+    { id: 79, question: "Who composed 'The Four Seasons'?", options: ["Wolfgang Mozart", "Antonio Vivaldi", "Johann Sebastian Bach", "George Frideric Handel"], correct: 1, difficulty: 3, category: "Music", type: "trivia" },
+    { id: 80, question: "Which continent is entirely within the Southern Hemisphere?", options: ["South America", "Africa", "Australia", "Antarctica"], correct: 3, difficulty: 3, category: "Geography", type: "trivia" },
+    { id: 81, question: "Who wrote 'One Hundred Years of Solitude'?", options: ["Jorge Luis Borges", "Gabriel García Márquez", "Pablo Neruda", "Octavio Paz"], correct: 1, difficulty: 3, category: "Literature", type: "trivia" },
+    { id: 82, question: "What is the chemical formula for sulfuric acid?", options: ["H2SO3", "H2SO4", "HSO4", "H3SO4"], correct: 1, difficulty: 3, category: "Chemistry", type: "trivia" },
+    { id: 83, question: "Which country hosted the 1996 Summer Olympics?", options: ["Barcelona", "Atlanta", "Sydney", "Athens"], correct: 1, difficulty: 3, category: "Sports", type: "trivia" },
+    { id: 84, question: "What is the name of the largest blood vessel in the body?", options: ["Carotid Artery", "Aorta", "Vena Cava", "Pulmonary Vein"], correct: 1, difficulty: 3, category: "Biology", type: "trivia" },
+    { id: 85, question: "Who was the first woman to win a Nobel Prize?", options: ["Lise Meitner", "Marie Curie", "Dorothy Hodgkin", "Irène Joliot-Curie"], correct: 1, difficulty: 3, category: "History", type: "trivia" },
+    { id: 86, question: "Which ancient wonder is still standing?", options: ["Hanging Gardens of Babylon", "Great Pyramid of Giza", "Colossus of Rhodes", "Pharos of Alexandria"], correct: 1, difficulty: 3, category: "History", type: "trivia" },
+    { id: 87, question: "Who wrote 'Pride and Prejudice'?", options: ["Charlotte Brontë", "Emily Brontë", "Jane Austen", "George Eliot"], correct: 2, difficulty: 3, category: "Literature", type: "trivia" },
+    { id: 88, question: "Which river flows through Cairo?", options: ["Tigris", "Euphrates", "Nile", "Jordan"], correct: 2, difficulty: 3, category: "Geography", type: "trivia" },
+    { id: 89, question: "Who painted 'The Persistence of Memory'?", options: ["Pablo Picasso", "Salvador Dalí", "Joan Miró", "Marc Chagall"], correct: 1, difficulty: 3, category: "Art", type: "trivia" },
+    { id: 90, question: "What is the largest moon of Jupiter?", options: ["Europa", "Io", "Ganymede", "Callisto"], correct: 2, difficulty: 3, category: "Science", type: "trivia" },
+    { id: 91, question: "Who wrote 'The Brothers Karamazov'?", options: ["Leo Tolstoy", "Fyodor Dostoevsky", "Ivan Turgenev", "Nikolai Gogol"], correct: 1, difficulty: 3, category: "Literature", type: "trivia" },
+    { id: 92, question: "What is the capital of Zimbabwe?", options: ["Harare", "Bulawayo", "Gweru", "Mutare"], correct: 0, difficulty: 3, category: "Geography", type: "trivia" },
+    { id: 93, question: "Which element is the most electronegative?", options: ["Oxygen", "Chlorine", "Fluorine", "Nitrogen"], correct: 2, difficulty: 3, category: "Chemistry", type: "trivia" },
+    { id: 94, question: "What year did the Challenger space shuttle disaster occur?", options: ["1984", "1985", "1986", "1987"], correct: 2, difficulty: 3, category: "History", type: "trivia" },
+    { id: 95, question: "Who was the first African American president of the United States?", options: ["Bill Clinton", "George W. Bush", "Barack Obama", "Donald Trump"], correct: 2, difficulty: 3, category: "History", type: "trivia" },
+    { id: 96, question: "What is the capital of Peru?", options: ["Cusco", "Lima", "Arequipa", "Trujillo"], correct: 1, difficulty: 3, category: "Geography", type: "trivia" },
+    { id: 97, question: "Who composed 'Moonlight Sonata'?", options: ["Wolfgang Mozart", "Ludwig van Beethoven", "Johann Sebastian Bach", "Franz Schubert"], correct: 1, difficulty: 3, category: "Music", type: "trivia" },
+    { id: 98, question: "What is the smallest continent by area?", options: ["Europe", "South America", "Australia", "Antarctica"], correct: 2, difficulty: 3, category: "Geography", type: "trivia" },
+    { id: 99, question: "Who discovered penicillin?", options: ["Louis Pasteur", "Alexander Fleming", "Joseph Lister", "Ignaz Semmelweis"], correct: 1, difficulty: 3, category: "Science", type: "trivia" },
+    { id: 100, question: "What is the capital of Iceland?", options: ["Akureyri", "Reykjavik", "Hafnarfjörður", "Kópavogur"], correct: 1, difficulty: 3, category: "Geography", type: "trivia" },
+
+    // HARD SPELLING (101-115)
+    { id: 101, question: "Which spelling is CORRECT?", options: ["Embarass", "Embarrass", "Embarass", "Embarrass"], correct: 1, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 102, question: "Which spelling is CORRECT?", options: ["Conscience", "Consciance", "Concsience", "Concheince"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 103, question: "Which spelling is CORRECT?", options: ["Maintainence", "Maintenance", "Maintenence", "Maintainance"], correct: 1, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 104, question: "Which spelling is CORRECT?", options: ["Rhythm", "Rythm", "Rhytm", "Rithm"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 105, question: "Which spelling is CORRECT?", options: ["Pneumonia", "Numonia", "Pneunomia", "Pneumonia"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 106, question: "Which spelling is CORRECT?", options: ["Conneisseur", "Connoisseur", "Connisseur", "Conoiseur"], correct: 1, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 107, question: "Which spelling is CORRECT?", options: ["Occassionally", "Ocasionally", "Occasionally", "Occassionally"], correct: 2, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 108, question: "Which spelling is CORRECT?", options: ["Misspelled", "Mispelled", "Misspeled", "Mispeled"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 109, question: "Which spelling is CORRECT?", options: ["Queueing", "Queing", "Qeuing", "Queuuing"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 110, question: "Which spelling is CORRECT?", options: ["Diarrhoea", "Diarrhea", "Diarrhea", "Diarrea"], correct: 1, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 111, question: "Which spelling is CORRECT?", options: ["Bureaucracy", "Burocracy", "Bureaucrasy", "Buraucracy"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 112, question: "Which spelling is CORRECT?", options: ["Mischievous", "Mischievious", "Mischievous", "Mischevious"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 113, question: "Which spelling is CORRECT?", options: ["Parallel", "Parrallel", "Parallel", "Paralell"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 114, question: "Which spelling is CORRECT?", options: ["Accommodate", "Acommodate", "Accomodate", "Accommodate"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
+    { id: 115, question: "Which spelling is CORRECT?", options: ["Surveillance", "Surveilance", "Surveylance", "Survaillance"], correct: 0, difficulty: 3, category: "Spelling", type: "spelling" },
   ];
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -822,27 +140,27 @@ const TriviaGame = () => {
   const [usedQuestionIds, setUsedQuestionIds] = useState([]);
   const [soundEnabled, setSoundEnabled] = useState(true);
   const audioContextRef = useRef(null);
+  const [gameCount, setGameCount] = useState(0);
 
-  // Initialize game on mount
   useEffect(() => {
     initializeNewGame();
   }, []);
 
   const initializeNewGame = () => {
-    // Filter out used questions and get 50 new ones
     const availableQuestions = allTriviaQuestions.filter(
       q => !usedQuestionIds.includes(q.id)
     );
 
     if (availableQuestions.length < 50) {
-      // Reset used questions if we've used all
       const newShuffled = [...allTriviaQuestions].sort(() => Math.random() - 0.5).slice(0, 50);
       setQuestionShuffled(newShuffled);
       setUsedQuestionIds(newShuffled.map(q => q.id));
+      setGameCount(gameCount + 1);
     } else {
       const newShuffled = availableQuestions.sort(() => Math.random() - 0.5).slice(0, 50);
       setQuestionShuffled(newShuffled);
       setUsedQuestionIds([...usedQuestionIds, ...newShuffled.map(q => q.id)]);
+      setGameCount(gameCount + 1);
     }
   };
 
@@ -861,16 +179,14 @@ const TriviaGame = () => {
       gainNode.connect(audioContext.destination);
 
       if (isCorrect) {
-        // Correct sound: ascending tones
-        oscillator.frequency.setValueAtTime(523.25, now); // C5
-        oscillator.frequency.setValueAtTime(659.25, now + 0.1); // E5
-        oscillator.frequency.setValueAtTime(783.99, now + 0.2); // G5
+        oscillator.frequency.setValueAtTime(523.25, now);
+        oscillator.frequency.setValueAtTime(659.25, now + 0.1);
+        oscillator.frequency.setValueAtTime(783.99, now + 0.2);
         gainNode.gain.setValueAtTime(0.3, now);
         gainNode.gain.setValueAtTime(0, now + 0.4);
         oscillator.start(now);
         oscillator.stop(now + 0.4);
       } else {
-        // Wrong sound: descending buzz
         oscillator.frequency.setValueAtTime(400, now);
         oscillator.frequency.setValueAtTime(200, now + 0.15);
         gainNode.gain.setValueAtTime(0.3, now);
@@ -960,7 +276,7 @@ const TriviaGame = () => {
     return (
       <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4">
         <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Press+Start+2P&display=swap');
+          @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
           
           .game-bg {
             background: linear-gradient(135deg, #1a0000 0%, #2d0000 25%, #1a0000 50%, #2d0000 75%, #1a0000 100%);
@@ -1060,15 +376,23 @@ const TriviaGame = () => {
 
             <button
               onClick={handleRestart}
-              className="w-full bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:via-amber-200 hover:to-amber-300 text-black font-black text-xl px-8 py-4 rounded-xl transition transform hover:scale-105 active:scale-95 shadow-xl border-2 border-amber-200 mb-4"
+              className="w-full bg-gradient-to-r from-amber-400 via-amber-300 to-amber-400 hover:from-amber-300 hover:via-amber-200 hover:to-amber-300 text-black font-black text-xl px-8 py-4 rounded-xl transition transform hover:scale-105 active:scale-95 shadow-xl border-2 border-amber-200 mb-6"
               style={{fontFamily: 'Bebas Neue'}}
             >
               PLAY AGAIN - NEW QUESTIONS
             </button>
 
-            <p className="text-gray-400 text-sm">
-              You'll get 50 different questions next time!
-            </p>
+            <div className="border-t border-amber-400 pt-6">
+              <p className="text-amber-300 text-2xl font-black mb-2" style={{fontFamily: 'Bebas Neue'}}>
+                THANK YOU FOR PLAYING! 🎮
+              </p>
+              <p className="text-gray-300 text-sm mb-3">
+                You'll get 50 different questions next time!
+              </p>
+              <p className="text-amber-400 text-sm tracking-widest font-bold">
+                Developed by Engineer Derrick
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -1082,7 +406,7 @@ const TriviaGame = () => {
   return (
     <div className="min-h-screen relative overflow-hidden flex flex-col items-center justify-center p-4">
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=VT323&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
         
         .game-bg {
           background: linear-gradient(135deg, #1a0000 0%, #2d0000 25%, #1a0000 50%, #2d0000 75%, #1a0000 100%);
@@ -1301,12 +625,10 @@ const TriviaGame = () => {
         }
       `}</style>
 
-      {/* Background */}
       <div className="game-bg"></div>
       <div className="stage-light"></div>
       <div className="stage-light"></div>
 
-      {/* Sound Toggle */}
       <button
         onClick={() => setSoundEnabled(!soundEnabled)}
         className="sound-toggle"
@@ -1319,9 +641,7 @@ const TriviaGame = () => {
         )}
       </button>
 
-      {/* Content */}
       <div className="w-full max-w-3xl relative z-10">
-        {/* Header */}
         <div className="mb-8 px-4">
           <div className="flex justify-between items-center mb-6">
             <div>
@@ -1348,9 +668,7 @@ const TriviaGame = () => {
           <div className="progress-bar" style={{width: `${progress}%`}}></div>
         </div>
 
-        {/* Main Question Card */}
         <div className="question-card p-8 mb-8">
-          {/* Difficulty Level */}
           <div className="flex justify-between items-center mb-8">
             <div className="flex gap-2">
               {[1, 2, 3].map(level => (
@@ -1369,7 +687,6 @@ const TriviaGame = () => {
             </div>
           </div>
 
-          {/* Question Text */}
           <h2 className="text-center text-3xl font-black text-white mb-2" style={{fontFamily: 'Bebas Neue'}}>
             {question.question}
           </h2>
@@ -1377,7 +694,6 @@ const TriviaGame = () => {
             {question.category}
           </p>
 
-          {/* Answer Options */}
           <div className="space-y-4">
             {question.options.map((option, index) => (
               <button
@@ -1403,7 +719,6 @@ const TriviaGame = () => {
           </div>
         </div>
 
-        {/* Feedback Section */}
         {answered && (
           <div className="text-center mb-6 px-4">
             <div className={`feedback-text flex items-center justify-center gap-3 mb-6 ${
